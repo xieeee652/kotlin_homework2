@@ -11,19 +11,22 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
+     class FragmentPagerSupport extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.e("MainActivity","onCreate");
-         class FragmentPagerSupport extends FragmentActivity {
+
+        ViewPager a = findViewById(R.id.viewPager);
         //建立 FragmentPagerAdapter 物件
         ViewPagerAdapter adapter = new ViewPagerAdapter();
+        adapter.getSupportFragmentManager();
         //連接 Adapter，讓畫面(Fragment)與 ViewPager 建立關聯
-   //     private ViewPager adapter;
-     //   adapter = findViewById(R.id.viewPager);
-    }
+       a.setAdapter(a.getAdapter());
+
+  }
 }
     @Override
     public void onRestart() {
@@ -58,9 +61,11 @@ public class MainActivity extends AppCompatActivity {
 }
 
 public class ViewPagerAdapter(FragmentManager fm) extends FragmentActivity  {
-        //回傳對應位置的 Fragment，決定頁面的呈現順序
-        @Override
-        public void getItem(int position){
+
+    @Override
+    //回傳對應位置的 Fragment，決定頁面的呈現順序
+        protected void getItem(int position){
+            getItem(position);
         switch (position)
         {
         case 0:
@@ -69,17 +74,17 @@ public class ViewPagerAdapter(FragmentManager fm) extends FragmentActivity  {
         case 1:
             SecondFragment b = new SecondFragment(); //第二頁要呈現的 Fragment
             break;
-        case 2:
-            ThirdFragment c = new ThirdFragment(); //第三頁要呈現的 Fragment
-            break;
         default:
-            FirstFragment d = new FirstFragment();
+            ThirdFragment c = new ThirdFragment();
             break;
         }
 
         }
         //回傳 Fragment 頁數
+
         public int getCount() {
+            getCount();
             return 3;
         }
-    };
+
+    }
